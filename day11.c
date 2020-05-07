@@ -2,22 +2,18 @@
 #define size 100
 int main()
 {
-    int n,i,j,k,l,x,swapped,temp;
+    int n,i,j,k,l,x,swapped,temp,count=0;
     int a[100];
     printf("Enter the size of the array\t");
     scanf("%d",&n);
     printf("Enter the elements of array\n");
-    l=n;
-    for(i=0;i<l;i++)
+    l=n-1;
+    for(i=0;i<n;i++)
     {
         scanf("%d",&a[i]);
     }
-    for(i=0;i<l;i++)
+    for(i=0;i<n;i++)
     {
-        if(n==0)
-        {
-            break;
-        }
         for(j=0;j<n;j++)
         {
             for(k=j+1;k<n;k++)
@@ -30,17 +26,23 @@ int main()
                 }
             }
         }
-        if(a[n-1]==a[n-2])
+	if(count==n-1||count==n)
+	{
+		(a[0]!=9999)?printf("%d",a[0]):printf("0");		
+		break;	
+	}
+	
+        if(a[(l-1)-count]==a[l-count])
         {
-            n=n-2;
+	   a[l-count]=9999;
+	   a[(l-1)-count]=9999;
+           count+=2;        
         }
         else
         {
-            a[n-2]=(a[n-1]-a[n-2]);
-            n=n-1;
+	    a[l-count]-=a[(l-1)-count];
+            a[(l-1)-count]=9999;
+            count++;
         }
     }
-    printf("n=%d",n);
-    (n==0)?printf("%d",a[n]):printf("0");
-     return 0;
 }
